@@ -67,19 +67,19 @@ namespace WebAPI.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductId1")
-                        .HasColumnType("int");
+                    //b.Property<int?>("ProductId1")
+                    //    .HasColumnType("int");
 
-                    b.Property<int?>("ShoppingListId1")
-                        .HasColumnType("int");
+                    //b.Property<int?>("ShoppingListId1")
+                    //    .HasColumnType("int");
 
                     b.HasKey("ShoppingListId", "ProductId");
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("ProductId1");
+                    //b.HasIndex("ProductId1");
 
-                    b.HasIndex("ShoppingListId1");
+                    //b.HasIndex("ShoppingListId1");
 
                     b.ToTable("ShoppingListProduct");
                 });
@@ -92,9 +92,9 @@ namespace WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebAPI.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId1");
+                    //b.HasOne("WebAPI.Models.Product", "Product")
+                    //    .WithMany()
+                    //    .HasForeignKey("ProductId1");
 
                     b.HasOne("WebAPI.Models.ShoppingList", null)
                         .WithMany("ShoppingListProducts")
@@ -102,9 +102,9 @@ namespace WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebAPI.Models.ShoppingList", "ShoppingList")
-                        .WithMany()
-                        .HasForeignKey("ShoppingListId1");
+                    //b.HasOne("WebAPI.Models.ShoppingList", "ShoppingList")
+                    //    .WithMany()
+                    //    .HasForeignKey("ShoppingListId1");
                 });
 #pragma warning restore 612, 618
         }

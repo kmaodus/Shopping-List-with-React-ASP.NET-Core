@@ -10,8 +10,8 @@ using WebAPI.Data;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(ShoppingListDbContext))]
-    [Migration("20200728210922_ShoppingListProductMigration2")]
-    partial class ShoppingListProductMigration2
+    [Migration("20200728221750_NewMigration")]
+    partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,7 +81,7 @@ namespace WebAPI.Migrations
 
                     //b.HasIndex("ProductId1");
 
-                    b.HasIndex("ShoppingListId");
+                    //b.HasIndex("ShoppingListId1");
 
                     b.ToTable("ShoppingListProduct");
                 });

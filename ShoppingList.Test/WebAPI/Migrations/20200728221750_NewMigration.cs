@@ -2,27 +2,37 @@
 
 namespace WebAPI.Migrations
 {
-    public partial class ShoppingListProductMigration2 : Migration
+    public partial class NewMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "ShoppingList",
-                maxLength: 100,
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
+            migrationBuilder.CreateTable(
+                name: "Product",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 100, nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    AddedToCart = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Product", x => x.Id);
+                });
 
-            migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Product",
-                maxLength: 100,
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
+            migrationBuilder.CreateTable(
+                name: "ShoppingList",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingList", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "ShoppingListProduct",
@@ -68,7 +78,7 @@ namespace WebAPI.Migrations
                 column: "ProductId");
 
             //migrationBuilder.CreateIndex(
-            //    name: "IX_ShoppingListProduct_ProductId1",
+            //    name: "IX_ShoppingListProduct_ProductId",
             //    table: "ShoppingListProduct",
             //    column: "ProductId1");
 
@@ -83,21 +93,11 @@ namespace WebAPI.Migrations
             migrationBuilder.DropTable(
                 name: "ShoppingListProduct");
 
-            migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "ShoppingList",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldMaxLength: 100);
+            migrationBuilder.DropTable(
+                name: "Product");
 
-            migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Product",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldMaxLength: 100);
+            migrationBuilder.DropTable(
+                name: "ShoppingList");
         }
     }
 }
