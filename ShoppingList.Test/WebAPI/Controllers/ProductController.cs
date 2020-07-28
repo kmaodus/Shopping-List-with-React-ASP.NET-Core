@@ -48,10 +48,12 @@ namespace WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(int id, Product product)
         {
-            if (id != product.Id)
-            {
-                return BadRequest();
-            }
+            //if (id != product.Id)
+            //{
+            //    return BadRequest();
+            //}
+
+            product.Id = id;
 
             _context.Entry(product).State = EntityState.Modified;
 
