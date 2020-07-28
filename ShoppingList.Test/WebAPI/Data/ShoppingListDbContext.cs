@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebAPI.Models;
 
 namespace WebAPI.Data
 {
@@ -7,6 +8,7 @@ namespace WebAPI.Data
         public ShoppingListDbContext(DbContextOptions<ShoppingListDbContext> options)
             : base(options) { }
 
-
+        public DbSet<ShoppingList> ShoppingList { get; set; }
+        public DbSet<Product> Product { get; set; }
     }
 }
