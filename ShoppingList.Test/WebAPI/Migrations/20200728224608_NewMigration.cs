@@ -12,7 +12,7 @@ namespace WebAPI.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 100, nullable: false),
+                    Name = table.Column<string>(maxLength: 100, nullable: true),
                     Quantity = table.Column<int>(nullable: false),
                     AddedToCart = table.Column<bool>(nullable: false)
                 },
@@ -27,7 +27,7 @@ namespace WebAPI.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 100, nullable: false)
+                    Name = table.Column<string>(maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,6 +47,12 @@ namespace WebAPI.Migrations
                 {
                     table.PrimaryKey("PK_ShoppingListProduct", x => new { x.ShoppingListId, x.ProductId });
                     table.ForeignKey(
+                        name: "FK_ShoppingListProduct_ShoppingList_ShoppingListId",
+                        column: x => x.ShoppingListId,
+                        principalTable: "ShoppingList",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_ShoppingListProduct_Product_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Product",
@@ -58,12 +64,7 @@ namespace WebAPI.Migrations
                     //    principalTable: "Product",
                     //    principalColumn: "Id",
                     //    onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ShoppingListProduct_ShoppingList_ShoppingListId",
-                        column: x => x.ShoppingListId,
-                        principalTable: "ShoppingList",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    
                     //table.ForeignKey(
                     //    name: "FK_ShoppingListProduct_ShoppingList_ShoppingListId1",
                     //    column: x => x.ShoppingListId1,
@@ -78,7 +79,7 @@ namespace WebAPI.Migrations
                 column: "ProductId");
 
             //migrationBuilder.CreateIndex(
-            //    name: "IX_ShoppingListProduct_ProductId",
+            //    name: "IX_ShoppingListProduct_ProductId1",
             //    table: "ShoppingListProduct",
             //    column: "ProductId1");
 

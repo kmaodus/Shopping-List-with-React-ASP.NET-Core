@@ -10,7 +10,7 @@ using WebAPI.Data;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(ShoppingListDbContext))]
-    [Migration("20200728221750_NewMigration")]
+    [Migration("20200728224608_NewMigration")]
     partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,6 +88,12 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Models.ShoppingListProduct", b =>
                 {
+                    b.HasOne("WebAPI.Models.ShoppingList", null)
+                        .WithMany("ShoppingListProducts")
+                        .HasForeignKey("ShoppingListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WebAPI.Models.Product", null)
                         .WithMany("ShoppingListProducts")
                         .HasForeignKey("ProductId")
@@ -98,11 +104,7 @@ namespace WebAPI.Migrations
                     //    .WithMany()
                     //    .HasForeignKey("ProductId1");
 
-                    b.HasOne("WebAPI.Models.ShoppingList", null)
-                        .WithMany("ShoppingListProducts")
-                        .HasForeignKey("ShoppingListId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    
 
                     //b.HasOne("WebAPI.Models.ShoppingList", "ShoppingList")
                     //    .WithMany()

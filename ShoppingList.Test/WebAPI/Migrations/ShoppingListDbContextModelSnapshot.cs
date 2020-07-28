@@ -86,6 +86,12 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Models.ShoppingListProduct", b =>
                 {
+                    b.HasOne("WebAPI.Models.ShoppingList", null)
+                        .WithMany("ShoppingListProducts")
+                        .HasForeignKey("ShoppingListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WebAPI.Models.Product", null)
                         .WithMany("ShoppingListProducts")
                         .HasForeignKey("ProductId")
@@ -96,11 +102,7 @@ namespace WebAPI.Migrations
                     //    .WithMany()
                     //    .HasForeignKey("ProductId1");
 
-                    b.HasOne("WebAPI.Models.ShoppingList", null)
-                        .WithMany("ShoppingListProducts")
-                        .HasForeignKey("ShoppingListId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    
 
                     //b.HasOne("WebAPI.Models.ShoppingList", "ShoppingList")
                     //    .WithMany()
