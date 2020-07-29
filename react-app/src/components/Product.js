@@ -1,14 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from "../actions/product"
+import { Grid, Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, withStyles } from '@material-ui/core';
+import ProductForm from './ProductForm'
 
-const Product = (props) => {
+const styles = theme => ({
+    paper: {
+        margin: theme.spacing(2),
+        padding: theme.spacing(2),
+    }
+})
+
+const Product = ({ classes, ...props }) => {
 
     useEffect(() => {
         props.fetchAllProducts()
     }, [])
 
-    return (<div>from Product</div>);
+    return (
+        <Paper>
+            <Grid container>
+                <Grid item xs={6}>
+                    <ProductForm />
+                </Grid>
+                <Grid item xs={6}>
+                    <TableContainer>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Name</TableCell>
+                                    <TableCell>Quantity</TableCell>
+                                    <TableCell>Added to cart</TableCell>
+                                    {/* <TableCell>shoppingListProducts ID</TableCell> */}
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    props.productList.map((record, index) => {
+                                        return (<TableRow key={index} >
+                                            <TableCell>{record.name}</TableCell>
+                                            <TableCell>{record.quantity}</TableCell>
+                                            <TableCell>{String(record.addedToCart)}</TableCell>
+                                            {/* <TableCell>{String(record.shoppingListProducts)}</TableCell> */}
+                                        </TableRow>)
+                                    })
+                                }
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Grid>
+            </Grid>
+        </Paper>
+    );
+
 }
 
 const mapStateToProps = state => {
@@ -22,4 +66,5 @@ const mapActionToProps = {
     fetchAllProducts: actions.fetchAll
 }
 
+// export default connect(mapStateToProps, mapActionToProps)(withStyles(styles))(Product);
 export default connect(mapStateToProps, mapActionToProps)(Product);

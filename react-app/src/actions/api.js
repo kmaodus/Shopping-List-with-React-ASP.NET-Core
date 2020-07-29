@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { product } from '../reducers/product'
+import axios from 'axios';
 
 const baseUrl = "http://localhost:60528/api/"
 
@@ -11,7 +10,6 @@ export default {
 			create: newRecord => axios.post(url, newRecord),
 			update: (id, updateRecord) => axios.put(url + id, updateRecord),
 			delete: id => axios.delete(url + id)
-
 		}
 	}
 }
