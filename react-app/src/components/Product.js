@@ -39,7 +39,7 @@ const Product = ({ classes, ...props }) => {
         <Paper className={classes.paper} elevation={3}>
             <Grid container>
                 <Grid item xs={6}>
-                    <ProductForm {...(currentId, setCurrentId)} />
+                    <ProductForm {...({currentId, setCurrentId})} />
                 </Grid>
                 <Grid item xs={6}>
                     <TableContainer>

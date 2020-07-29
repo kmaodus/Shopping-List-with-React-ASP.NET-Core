@@ -79,9 +79,9 @@ const ProductForm = ({ classes, ...props }) => {
         if (validate()) {
             const onSuccess = () => {
                 resetForm()
-                addToast("Submitted successfully", { appearance: 'info' })
+                addToast("Submitted successfully", { appearance: 'success' })
             }
-            if (props.currentId === 0)
+            if (props.currentId == 0)
                 props.createProduct(values, onSuccess)
             else
                 props.updateProduct(props.currentId, values, onSuccess)
@@ -89,7 +89,7 @@ const ProductForm = ({ classes, ...props }) => {
     }
 
     useEffect(() => {
-        if (props.currentId !== 0) {
+        if (props.currentId != 0) {
             setValues({
                 ...props.productList.find(x => x.id === props.currentId)
             })
