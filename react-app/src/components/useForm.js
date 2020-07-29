@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 
 const useForm = (initalFieldValues, validate, setCurrentId) => {
 
-    const { values, setValues } = useState(initalFieldValues)
-    const { errors, setErrors } = useState({})
+    const [values, setValues] = useState(initalFieldValues)
+    const [errors, setErrors] = useState({})
 
     const handleInputChange = e => {
         const { name, value } = e.target

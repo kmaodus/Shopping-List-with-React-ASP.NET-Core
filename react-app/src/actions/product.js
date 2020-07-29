@@ -56,8 +56,8 @@ export const update = (id, data, onSuccess) => dispatch => {
 }
 
 
-export const deleteProduct = (id, onSuccess) => dispatch => {
-  api.product().deleteProduct(id)
+export const Delete = (id, onSuccess) => dispatch => {
+  api.product().delete(id)
     .then(res => {
       dispatch({
         type: ACTION_TYPES.DELETE,

@@ -26,7 +26,7 @@ const styles = theme => ({
 
 
 const initialFieldValues = {
-    productName: '',
+    name: '',
     quantity: "1",
     addedToCart: "false"
 }
@@ -39,17 +39,17 @@ const ProductForm = ({ classes, ...props }) => {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        if ('productName' in fieldValues)
-            temp.productName = fieldValues.productName ? "" : "This field is required."
+        if ('name' in fieldValues)
+            temp.name = fieldValues.name ? "" : "This field is required."
         if ('quantity' in fieldValues)
             temp.quantity = fieldValues.quantity ? "" : "This field is required."
-        if ('addedToCart' in fieldValues)
-            temp.addedToCart = fieldValues.addedToCart ? "" : "This field is required."
+        // if ('addedToCart' in fieldValues)
+        //     temp.addedToCart = fieldValues.addedToCart ? "" : "This field is required."
         setErrors({
             ...temp
         })
 
-        if (fieldValues === values)
+        // if (fieldValues === values)
             return Object.values(temp).every(x => x === "")
     }
 
@@ -79,15 +79,13 @@ const ProductForm = ({ classes, ...props }) => {
         if (validate()) {
             const onSuccess = () => {
                 resetForm()
-                addToast("Submitted successfully", { appearance: 'success' })
+                addToast("Submitted successfully", { appearance: 'info' })
             }
             if (props.currentId === 0)
                 props.createProduct(values, onSuccess)
             else
                 props.updateProduct(props.currentId, values, onSuccess)
         }
-
-        // resetForm()
     }
 
     useEffect(() => {
@@ -97,7 +95,7 @@ const ProductForm = ({ classes, ...props }) => {
             })
             setErrors({})
         }
-    }, [props.currentId])
+    }, [props.currentId, props.productList, setErrors, setValues])
 
 
     return (
@@ -105,20 +103,22 @@ const ProductForm = ({ classes, ...props }) => {
             <Grid container>
                 <Grid item xs={6}>
                     <TextField
-                        name="productName"
+                        name="name"
                         variant="outlined"
                         label="Product name"
-                        value={values.productName}
+                        value={values.name}
                         onChange={handleInputChange}
-                        error={true}
-                        {...(errors.productName && { error: true, helperText: errors.productName })}
+                        // error={true}
+                        {...(errors.name && { error: true, helperText: errors.name })}
                     />
                     <TextField
                         name="quantity"
                         variant="outlined"
                         label="Quantity"
                         value={values.quantity}
-                        onChange={handleInputChange} />
+                        onChange={handleInputChange}
+                        // {...(errors.quantity && { error: true, helperText: errors.quantity })}
+                        />
                     <FormControl variant="outlined"
                         className={classes.formControl}>
                         <InputLabel ref={inputLabel}>Add to cart</InputLabel>

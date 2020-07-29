@@ -32,7 +32,7 @@ const Product = ({ classes, ...props }) => {
 
     const onDelete = id => {
         if (window.confirm('Are you sure you want to delete this product?'))
-            props.deleteProduct(id, () => addToast("Product deleted", { appereance: 'info' }))
+            props.deleteProduct(id, () => addToast("Product deleted", { appearance: 'success' }))
     }
 
     return (
@@ -57,9 +57,9 @@ const Product = ({ classes, ...props }) => {
                                 {
                                     props.productList.map((record, index) => {
                                         return (<TableRow key={index} hover>
-                                            <TableCell>{record.productName}</TableCell>
-                                            <TableCell>{record.quantity}</TableCell>
-                                            <TableCell>{String(record.addedToCart)}</TableCell>
+                                            <TableCell align='center'>{record.name}</TableCell>
+                                            <TableCell align='center'>{record.quantity}</TableCell>
+                                            <TableCell align='center'>{String(record.addedToCart)}</TableCell>
                                             {/* <TableCell>{String(record.shoppingListProducts)}</TableCell> */}
                                             <TableCell>
                                                 <ButtonGroup variant="text">
@@ -91,7 +91,7 @@ const mapStateToProps = state => {
 // props.productList
 const mapActionToProps = {
     fetchAllProducts: actions.fetchAll,
-    deleteProduct: actions.deleteProduct
+    deleteProduct: actions.Delete
 }
 
 export default connect(mapStateToProps, mapActionToProps)(withStyles(styles)(Product));
