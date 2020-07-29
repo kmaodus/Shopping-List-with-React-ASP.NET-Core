@@ -10,8 +10,9 @@ export const ACTION_TYPES = {
 export const fetchAll = () => (dispatch) => {
   // operacije ...
   // get api req
-  api.product()
+  api.product().fetchAll()
     .then((response) => {
+      console.log(response)
       dispatch({
         type: ACTION_TYPES.FETCH_ALL,
         payload: response.data,

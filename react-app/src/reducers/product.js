@@ -13,6 +13,6 @@ export const product = (state = initalState, action) => {
             }
 
         default:
-            return state;
+            return state
     }
 }
