@@ -22,6 +22,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
  -  Visual Studio Code
  -  Git bash
  -  GitKraken
+ - Postman
 
 
 
@@ -29,27 +30,30 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
   
 
-## Available Scripts
+## Setup
+
+Check your connection string inside appsettings.json -->
+*.\ShoppingListReact_ASP.NET_API\ShoppingList.Test\WebAPI\appsettings.json*
+
+In my case it is: 
+**"ShoppingListDbContext": 
+"Server=LocalDb)\\MSSQLLocalDB;Database=shoppingListTest;Trusted_Connection=True;MultipleActiveResultSets=True;"**
+
+Inside Visual Studio Package Manager Console run ***Update-Database*** command to create the database to the latest migration.
+
+If that's not working please run the SQL scripts: 
+
+ - **CreateDatabase.sql**
+ - **ImportData.sql**
+
+After you start the project it should be running on http://localhost:60528 .
+<br/>
+
+In the **react-app** directory, you can run:
 
   
 
-In the project directory, you can run:
-
-  
-
-### `yarn start`
-
-  
-
-Runs the app in the development mode.<br />
+### `npm install`
+### `npm start`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-  
-
-The page will reload if you make edits.<br />
-
-You will also see any lint errors in the console.
-
-  
- 
