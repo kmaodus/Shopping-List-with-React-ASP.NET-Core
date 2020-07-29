@@ -46,9 +46,9 @@ const Product = ({ classes, ...props }) => {
                         <Table>
                             <TableHead className={classes.root}>
                                 <TableRow>
-                                    <TableCell>Name</TableCell>
-                                    <TableCell>Quantity</TableCell>
-                                    <TableCell>Added to cart</TableCell>
+                                    <TableCell align='center'>Name</TableCell>
+                                    <TableCell align='center'>Quantity</TableCell>
+                                    <TableCell align='center'>Added to cart</TableCell>
                                     {/* <TableCell>shoppingListProducts ID</TableCell> */}
                                     <TableCell></TableCell>
                                 </TableRow>
