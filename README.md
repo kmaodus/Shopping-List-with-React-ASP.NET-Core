@@ -1,43 +1,55 @@
+
 # Shopping list app
 
-Testing ASP.NET Core Web API based on a MSSQL Server database with React.js for frontend.
+  
+
+Testing ASP.NET Core 3.1 Web API based on a MSSQL Server database with React.js for frontend with Redux and React Hooks.
 
 
 
-react-app file structure
--------------
+**Material UI** for styling. https://material-ui.com/
 
-● src
-+---● actions
-|   |
-|   |-- api.js (handle all http request)
-|   |-- product.js (Redux actions & action creators) 
-|   |-- shoppingList.js (Redux actions & action creators) 
-|   |-- store.js (configure redux store)
-|
-+---● components
-|   |
-|   |--ProductForm.js (form operations) - child
-|   |--Product.js  (list of records) - parent
-|   |--ShopingListForm.js (form operations) - child
-|   |--ShopingList.js  (list of records) - parent
-|   |--useForm.js (handles common form opearations)
-|
-|---● reducers
-|   |
-|   |--product.js
-|   |--shoppingList.js
-|   |--index.js
-|
-|-- App.js
-|-- index.js
-|-- index.css
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+**Chrome extension**: https://github.com/zalmoxisus/redux-devtools-extension
+
+  
+
+**Tools used:**
+
+ - Microsoft SQL Server
+ -  Visual Studio 2019
+ -  Visual Studio Code
+ -  Git bash
+ -  GitKraken
 
 
-redux, react-redux, redux-thunk
 
-actions - create, update, delete etc ,data 
-reducers
-store
 
-cmpnt -> dispatch(action) -> reducer -> cmpnt
+
+  
+
+## Available Scripts
+
+  
+
+In the project directory, you can run:
+
+  
+
+### `yarn start`
+
+  
+
+Runs the app in the development mode.<br />
+
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+  
+
+The page will reload if you make edits.<br />
+
+You will also see any lint errors in the console.
+
+  
+ 

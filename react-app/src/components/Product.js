@@ -5,6 +5,11 @@ import { Grid, Paper, TableContainer, Table, TableHead, TableRow, TableCell, Tab
 import ProductForm from './ProductForm'
 
 const styles = theme => ({
+    root: {
+        "& .MuiTableCell-head": {
+            fontSize: "1.5rem"
+        }
+    },
     paper: {
         margin: theme.spacing(2),
         padding: theme.spacing(2),
@@ -18,7 +23,7 @@ const Product = ({ classes, ...props }) => {
     }, [])
 
     return (
-        <Paper>
+        <Paper className={classes.paper} elevation={3}>
             <Grid container>
                 <Grid item xs={6}>
                     <ProductForm />
@@ -26,7 +31,7 @@ const Product = ({ classes, ...props }) => {
                 <Grid item xs={6}>
                     <TableContainer>
                         <Table>
-                            <TableHead>
+                            <TableHead className={classes.root}>
                                 <TableRow>
                                     <TableCell>Name</TableCell>
                                     <TableCell>Quantity</TableCell>
@@ -37,7 +42,7 @@ const Product = ({ classes, ...props }) => {
                             <TableBody>
                                 {
                                     props.productList.map((record, index) => {
-                                        return (<TableRow key={index} >
+                                        return (<TableRow key={index} hover>
                                             <TableCell>{record.name}</TableCell>
                                             <TableCell>{record.quantity}</TableCell>
                                             <TableCell>{String(record.addedToCart)}</TableCell>
@@ -66,5 +71,5 @@ const mapActionToProps = {
     fetchAllProducts: actions.fetchAll
 }
 
-// export default connect(mapStateToProps, mapActionToProps)(withStyles(styles))(Product);
-export default connect(mapStateToProps, mapActionToProps)(Product);
+export default connect(mapStateToProps, mapActionToProps)(withStyles(styles)(Product));
+// export default connect(mapStateToProps, mapActionToProps)(Product);
