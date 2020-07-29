@@ -1,6 +1,9 @@
-import React, { useState } from "react";
-import { Grid, TextField, withStyles, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Grid, TextField, withStyles, FormControl, InputLabel, Select, MenuItem, Button, FormHelperText } from "@material-ui/core";
 import useForm from "./useForm"
+import { connect } from 'react-redux';
+import * as actions from "../actions/product"
+import { useToasts } from "react-toast-notifications";
 
 const styles = theme => ({
     root: {
@@ -15,18 +18,42 @@ const styles = theme => ({
     },
     smMargin: {
         margin: theme.spacing(1)
+    },
+    mdMargin: {
+        margin: theme.spacing(2)
     }
 })
 
 
 const initialFieldValues = {
-    productName: '',
+    name: '',
     quantity: "1",
     addedToCart: "false"
 }
 
 
 const ProductForm = ({ classes, ...props }) => {
+    //toast msg.
+    const { addToast } = useToasts()
+
+
+    const validate = (fieldValues = values) => {
+        let temp = { ...errors }
+        if ('name' in fieldValues)
+            temp.name = fieldValues.name ? "" : "This field is required."
+        if ('quantity' in fieldValues)
+            temp.quantity = fieldValues.quantity ? "" : "This field is required."
+        // if ('addedToCart' in fieldValues)
+        //     temp.addedToCart = fieldValues.addedToCart ? "" : "This field is required."
+        setErrors({
+            ...temp
+        })
+
+        // if (fieldValues === values)
+            return Object.values(temp).every(x => x === "")
+    }
+
+
     const {
         values,
         setValues,
@@ -34,7 +61,9 @@ const ProductForm = ({ classes, ...props }) => {
         setErrors,
         handleInputChange,
         resetForm
-    } = useForm(initialFieldValues, props.setCurrentId)
+    } = useForm(initialFieldValues, validate, props.setCurrentId)
+
+
 
     //material-ui select component - label width fix
     const inputLabel = React.useRef(null);
@@ -45,22 +74,51 @@ const ProductForm = ({ classes, ...props }) => {
 
 
 
+    const handleSubmit = e => {
+        e.preventDefault()
+        if (validate()) {
+            const onSuccess = () => {
+                resetForm()
+                addToast("Submitted successfully", { appearance: 'success' })
+            }
+            if (props.currentId == 0)
+                props.createProduct(values, onSuccess)
+            else
+                props.updateProduct(props.currentId, values, onSuccess)
+        }
+    }
+
+    useEffect(() => {
+        if (props.currentId != 0) {
+            setValues({
+                ...props.productList.find(x => x.id === props.currentId)
+            })
+            setErrors({})
+        }
+    }, [props.currentId, props.productList, setErrors, setValues])
+
+
     return (
-        <form autoComplete="off" noValidate className={classes.root}>
+        <form autoComplete="off" noValidate className={classes.root} onSubmit={handleSubmit}>
             <Grid container>
                 <Grid item xs={6}>
                     <TextField
-                        name="productName"
+                        name="name"
                         variant="outlined"
                         label="Product name"
-                        value={values.productName}
-                        onChange={handleInputChange} />
+                        value={values.name}
+                        onChange={handleInputChange}
+                        // error={true}
+                        {...(errors.name && { error: true, helperText: errors.name })}
+                    />
                     <TextField
                         name="quantity"
                         variant="outlined"
                         label="Quantity"
                         value={values.quantity}
-                        onChange={handleInputChange} />
+                        onChange={handleInputChange}
+                        // {...(errors.quantity && { error: true, helperText: errors.quantity })}
+                        />
                     <FormControl variant="outlined"
                         className={classes.formControl}>
                         <InputLabel ref={inputLabel}>Add to cart</InputLabel>
@@ -74,11 +132,41 @@ const ProductForm = ({ classes, ...props }) => {
                             <MenuItem value="false">No</MenuItem>
                         </Select>
                     </FormControl>
+                    <div>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            className={classes.mdMargin}
+                        >
+                            Submit
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="default"
+                            className={classes.mdMargin}
+                            onClick={resetForm}
+                        >
+                            Reset
+                        </Button>
+                    </div>
                 </Grid>
-
             </Grid>
         </form>
     );
 }
 
-export default withStyles(styles)(ProductForm);
+const mapStateToProps = state => {
+    return {
+        productList: state.product.list
+    }
+}
+
+// props.productList
+const mapActionToProps = {
+    createProduct: actions.create,
+    updateProduct: actions.update
+}
+
+
+export default connect(mapStateToProps, mapActionToProps)(withStyles(styles)(ProductForm));
