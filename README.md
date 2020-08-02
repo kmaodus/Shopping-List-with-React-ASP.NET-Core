@@ -57,3 +57,10 @@ In the **react-app** directory, you can run:
 ### `npm start`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+![App preview](./assets/chrome_app.png)
+
+![Browser API](./assets/chrome_api.png)
+![Browser API](./assets/chrome_toast.png)
+![Browser API](./assets/postman_get_products.png)
+![Browser API](./assets/postman_post_products.png.png)
